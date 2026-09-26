@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CNN Explorer</title>
+  <meta name="description" content="Draw a digit and watch a convolutional neural network read it, layer by layer, in 3D." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23161c2c'/><rect x='6' y='6' width='8' height='8' fill='%23e8604a'/><rect x='18' y='6' width='8' height='8' fill='%238a2f8f'/><rect x='6' y='18' width='8' height='8' fill='%23fde9a0'/><rect x='18' y='18' width='8' height='8' fill='%232d2a6e'/></svg>" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar">
+      <div class="brand">
+        <strong>CNN Explorer</strong>
+        <span>How a convolutional neural network reads a handwritten digit</span>
+      </div>
+      <div class="topbar-right">
+        <div class="model-info" id="model-info">Loading model…</div>
+        <div class="layout-toggles">
+          <button class="icon-btn" data-panel-toggle="left" type="button" aria-controls="panel-left" aria-expanded="true" title="Hide the drawing panel">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" /><rect class="fill" x="2.5" y="3.5" width="3.5" height="9" /><path d="M6.5 2.5v11" /></svg>
+          </button>
+          <button class="icon-btn" data-panel-toggle="right" type="button" aria-controls="panel-right" aria-expanded="true" title="Hide the side panel">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" /><rect class="fill" x="10" y="3.5" width="3.5" height="9" /><path d="M9.5 2.5v11" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <aside class="panel left" id="panel-left">
+      <section class="card">
+        <h2><span class="step">1</span> Draw a digit</h2>
+        <div class="pad-wrap">
+          <canvas id="pad" width="280" height="280" aria-label="Drawing area"></canvas>
+          <div class="pad-hint" id="pad-hint">Draw a number from 0 to 9</div>
+        </div>
+        <div class="row">
+          <button id="clear" type="button">Clear</button>
+          <button id="example" type="button">Random MNIST digit</button>
+        </div>
+        <div class="seen">
+          <canvas id="seen" width="28" height="28" aria-label="28 by 28 network input"></canvas>
+          <p>What the network actually sees: <b>28×28</b> brightness values, cropped and centered like MNIST.
+            <span id="true-label"></span></p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2><span class="step">2</span> Prediction</h2>
+        <div class="prediction">
+          <div class="pred-digit" id="pred-digit">–</div>
+          <div class="pred-conf" id="pred-conf">Draw something to start</div>
+        </div>
+        <div id="bars" class="bars"></div>
+      </section>
+    </aside>
+
+    <main class="stage">
+      <div id="viewport"></div>
+      <div class="stage-toolbar">
+        <button id="overview" type="button" title="Show the whole network">Overview</button>
+        <button id="replay" type="button" title="Replay the forward pass animation">Replay forward pass</button>
+      </div>
+      <div class="legend">
+        <div><span class="swatch activation"></span>activation: 0 → strongest in layer</div>
+        <div><span class="swatch weight"></span>weight / contribution: − · 0 · +</div>
+      </div>
+      <button class="panel-toggle left" data-panel-toggle="left" type="button" aria-controls="panel-left" aria-expanded="true" title="Hide the drawing panel">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" /></svg>
+      </button>
+      <button class="panel-toggle right" data-panel-toggle="right" type="button" aria-controls="panel-right" aria-expanded="true" title="Hide the side panel">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" /></svg>
+      </button>
+      <div class="hint">Drag to orbit · right-drag to pan · scroll to zoom · click a cube to inspect it · Esc to deselect</div>
+      <div id="tooltip" class="tooltip" hidden></div>
+    </main>
+
+    <aside class="panel right" id="panel-right">
+      <nav class="tabs" role="tablist">
+        <button role="tab" data-tab="guide" class="active">Guide</button>
+        <button role="tab" data-tab="inspect">Inspect</button>
+        <button role="tab" data-tab="kernels">Kernels</button>
+        <button role="tab" data-tab="train">Train</button>
+      </nav>
+      <section class="tab" id="tab-guide"></section>
+      <section class="tab" id="tab-inspect" hidden></section>
+      <section class="tab" id="tab-kernels" hidden></section>
+      <section class="tab" id="tab-train" hidden></section>
+    </aside>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
