@@ -12,6 +12,11 @@ then retrain the network in your browser and watch its filters learn.
 ![Vite](https://img.shields.io/badge/Vite-build-646CFF?logo=vite&logoColor=white)
 ![MNIST test accuracy](https://img.shields.io/badge/MNIST_test_accuracy-98.86%25-2ea44f)
 ![Parameters](https://img.shields.io/badge/parameters-52,266-8a2f8f)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+### [▶ Try the live demo](https://moralesangel.github.io/cnn-explorer/)
+
+No install needed, it runs entirely in your browser (desktop recommended).
 
 <img src="docs/demo.gif" alt="Drawing a 2: every layer of the network reacts live, then a Conv 1 kernel slides across the image building its feature map" width="100%">
 
@@ -107,6 +112,7 @@ The pretrained weights (`public/model/weights.json`) and the MNIST subsets the b
 
 ```bash
 npm run build        # static site in dist/, works on GitHub Pages or any static host
+npm run deploy       # build and publish dist/ to the gh-pages branch (GitHub Pages)
 ```
 
 ### Regenerating the data and weights (optional)
@@ -167,3 +173,9 @@ In development, `window.cnn` exposes the app state and the forward pass in the b
   [interactive node-link visualization of CNNs](https://adamharley.com/nn_vis/).
 - Built with [three.js](https://threejs.org), [TensorFlow.js](https://www.tensorflow.org/js) and
   [Vite](https://vite.dev).
+
+## License
+
+The code is released under the [MIT License](LICENSE). The MNIST digits in `public/data/` come from the
+MNIST database by Yann LeCun, Corinna Cortes and Christopher J.C. Burges, which is distributed under the
+[Creative Commons Attribution-Share Alike 3.0](https://creativecommons.org/licenses/by-sa/3.0/) license.

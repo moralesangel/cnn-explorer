@@ -286,7 +286,7 @@ function updateModelInfo() {
     return;
   }
   const m = state.pretrained.meta;
-  $('#model-info').innerHTML = `Pretrained on ${m.trainSamples.toLocaleString()} digits · <b>${(m.testAccuracy * 100).toFixed(2)}%</b> test accuracy · ${params}`;
+  $('#model-info').innerHTML = `Pretrained on ${m.trainSamples.toLocaleString('en-US')} digits · <b>${(m.testAccuracy * 100).toFixed(2)}%</b> test accuracy · ${params}`;
 }
 
 async function showRandomExample() {
