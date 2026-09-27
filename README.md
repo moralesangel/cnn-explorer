@@ -13,6 +13,7 @@ then retrain the network in your browser and watch its filters learn.
 ![MNIST test accuracy](https://img.shields.io/badge/MNIST_test_accuracy-98.86%25-2ea44f)
 ![Parameters](https://img.shields.io/badge/parameters-52,266-8a2f8f)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+[![Deploy](https://github.com/moralesangel/cnn-explorer/actions/workflows/deploy.yml/badge.svg)](https://github.com/moralesangel/cnn-explorer/actions/workflows/deploy.yml)
 
 ### [▶ Try the live demo](https://moralesangel.github.io/cnn-explorer/)
 
@@ -112,8 +113,10 @@ The pretrained weights (`public/model/weights.json`) and the MNIST subsets the b
 
 ```bash
 npm run build        # static site in dist/, works on GitHub Pages or any static host
-npm run deploy       # build and publish dist/ to the gh-pages branch (GitHub Pages)
 ```
+
+Every push to `main` rebuilds the live demo on GitHub Pages automatically
+([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)).
 
 ### Regenerating the data and weights (optional)
 
